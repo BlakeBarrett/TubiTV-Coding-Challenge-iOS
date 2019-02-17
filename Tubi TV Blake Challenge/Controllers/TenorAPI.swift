@@ -77,8 +77,15 @@ class TenorAPI: TenorAPIProtocol {
         makeWebRequest(urlRequest: searchRequest,
                        callback: { (value: JSON) in
                         let results = value["results"] as? [JSON]
-                        let response = TenorResponse(from: results!.first!)
-                        success(response.media)
+                        var gifs = [TenorResource]()
+                        results?.forEach { result in
+                            
+                            let response = TenorResponse(from: result)
+                            if let gif = response.mp4 {
+                                gifs.append(gif)
+                            }
+                        }
+                        success(gifs)
         })
     }
     

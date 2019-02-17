@@ -14,16 +14,48 @@ class TenorResource {
     
     let dims: [Int]
     
-    let duration: Float
+    var duration: Double?
     
-    let size: Int
+    var size: Int?
     
-    init(from json: JSON) {
-        url = json["url"] as! String
-        preview = json["preview"] as! String
-        dims = json["dims"] as! [Int]
-        duration = json["duration"] as! Float
-        size = json["size"] as! Int
+    var width: Int {
+        
+        get {
+            
+            return dims[0]
+            
+        }
+        
     }
     
+    var height: Int {
+        
+        get {
+            
+            return dims[1]
+            
+        }
+        
+    }
+    
+    init(from json: JSON) {
+        
+        url = json["url"] as! String
+        
+        preview = json["preview"] as! String
+        
+        dims = json["dims"] as! [Int]
+        
+        if let duration = json["duration"] {
+            
+            self.duration = (duration as! Double)
+            
+        }
+        
+        if let size = json["size"] as? Int {
+            
+            self.size = size
+            
+        }
+    }
 }

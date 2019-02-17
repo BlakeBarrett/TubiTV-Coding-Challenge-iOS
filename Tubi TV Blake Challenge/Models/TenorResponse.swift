@@ -18,20 +18,27 @@ class TenorResponse {
     
     let tags: [String]
     
-    var media = [TenorResource]()
+    var mp4: TenorResource?
     
     init(from json: JSON) {
+        
         id = json["id"] as! String
+        
         title = json["title"] as! String
+        
         url = json["url"] as! String
+        
         tags = json["tags"] as! [String]
+        
         if let mediae = json["media"] as? [JSON] {
+            
             mediae.forEach { media in
-                media.forEach { value in
-                    if let valueJson = value as? JSON {
-                        var resource = TenorResource(from: valueJson)
-                        self.media.append(resource)
-                    }
+                
+                if let mp4Json = media["mp4"] as? JSON {
+                    
+                    let resource = TenorResource(from: mp4Json)
+                    
+                    self.mp4 = resource
                 }
             }
         }
