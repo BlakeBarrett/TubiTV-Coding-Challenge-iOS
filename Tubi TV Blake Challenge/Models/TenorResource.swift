@@ -40,11 +40,31 @@ class TenorResource {
     
     init(from json: JSON) {
         
-        url = json["url"] as! String
+        if let url = json["url"] as? String {
+            
+            self.url = url
+            
+        } else {
+            
+            self.url = ""
+            
+        }
         
-        preview = json["preview"] as! String
+        if let preview = json["preview"] as? String {
+            
+            self.preview = preview
+            
+        } else {
+            
+            self.preview = ""
+            
+        }
         
-        dims = json["dims"] as! [Int]
+        if let dims = json["dims"] as? [Int] {
+            self.dims = dims
+        } else {
+            self.dims = []
+        }
         
         if let duration = json["duration"] {
             
