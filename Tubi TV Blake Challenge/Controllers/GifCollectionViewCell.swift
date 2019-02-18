@@ -15,30 +15,39 @@ import UIKit
     var item: TenorResource?
     
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
+        
         addTapListener()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
     func set(_ value: TenorResource) {
+        
         loadImageFrom(url: value.preview)
+        
         item = value
+        
     }
     
     func loadImageFrom(url value: String) {
         
         DispatchQueue.global(qos: .background).async {
-            guard let url = URL(string: value),
-                let data = try? Data(contentsOf: url)
-                else { return }
+            
+            guard let url = URL(string: value), let data = try? Data(contentsOf: url) else { return }
+            
             let image = UIImage(data: data)
             
             DispatchQueue.main.async { [weak self] in
+                
                 let imageView = UIImageView(image: image!)
+                
                 imageView.frame = self?.contentView.frame ?? CGRect.zero
+                
                 imageView.contentMode = .scaleAspectFit
                 
                 self?.contentView.removeAllSubviews()
@@ -51,21 +60,36 @@ import UIKit
 }
 
 extension GifCollectionViewCell {
+    
     func addTapListener() {
+        
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
+        
         self.contentView.addGestureRecognizer(recognizer)
     }
     
     @IBAction func onTap(_ sender: UITapGestureRecognizer) {
         
+        guard let urlString = item?.url else { return }
+        
+        let player = GifPlayerViewController(nibName: nil, bundle: nil)
+        
+        player.play(urlString)
+        
+        // This is a _bit_ of a hack, but it's safe and it works.
+        UIApplication.shared.keyWindow?.rootViewController?.present(player,
+                                                                    animated: false)
     }
 }
 
-extension UIView {
+@objc extension UIView {
     
-    func removeAllSubviews() {
+    @objc func removeAllSubviews() {
+        
         subviews.forEach { view in
+            
             view.removeFromSuperview()
+            
         }
     }
 }
