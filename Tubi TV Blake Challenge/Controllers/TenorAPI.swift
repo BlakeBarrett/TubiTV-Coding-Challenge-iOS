@@ -9,10 +9,12 @@
 import Foundation
 
 typealias JSON = [String: Any]
+
 typealias TenorSuccessResponse = ([TenorResource]?) -> ()
+
 typealias TenorErrorResponse = (Error) -> ()
 
-private protocol TenorAPIProtocol {
+protocol TenorAPIProtocol {
     
     func requestAnonRequestID(success: @escaping (String) -> (),
                               failure: @escaping () -> ())
@@ -25,6 +27,7 @@ private protocol TenorAPIProtocol {
 class TenorAPI: TenorAPIProtocol {
     
     static let baseAPIURL = "https://api.tenor.com/v1/"
+    
     static let apiKey: String = "25BAZVPXTBJY"
     
     static var anonymousID: String = ""
@@ -75,16 +78,22 @@ class TenorAPI: TenorAPIProtocol {
                                   limit,
                                   searchTerm)
         guard let searchURL = URL(string: searchString) else { return }
+        
         let searchRequest = URLRequest(url: searchURL)
         
         makeWebRequest(urlRequest: searchRequest,
                        callback: { (value: JSON) in
+                        
                         let results = value["results"] as? [JSON]
+                        
                         var gifs = [TenorResource]()
+                        
                         results?.forEach { result in
                             
                             let response = TenorResponse(from: result)
+                            
                             if let gif = response.mp4 {
+                                
                                 gifs.append(gif)
                             }
                         }
