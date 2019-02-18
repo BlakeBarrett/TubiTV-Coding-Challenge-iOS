@@ -1,5 +1,5 @@
 //
-//  TenorResponseTest.swift
+//  TenorResourceTest.swift
 //  Tubi TV Blake ChallengeTests
 //
 //  Created by Blake Barrett on 2/17/19.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class TenorResponseTest: XCTestCase {
+class TenorResourceTest: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
