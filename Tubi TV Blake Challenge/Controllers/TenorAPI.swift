@@ -63,16 +63,19 @@ class TenorAPI: TenorAPIProtocol {
             return
         }
         
-        let limit = 8
-        let searchRequest = URLRequest(url:
-            URL(string:
-                String(format:
-                    "%@search?key=%@&anon_id=%@&limit=%d&q=%@",
-                       TenorAPI.baseAPIURL,
-                       TenorAPI.apiKey,
-                       TenorAPI.anonymousID,
-                       limit,
-                       query))!)
+        let limit = 25
+        
+        let searchTerm = query.replacingOccurrences(of: " ", with: "+")
+        
+        let searchString = String(format:
+            "%@search?key=%@&anon_id=%@&limit=%d&q=%@",
+                                  TenorAPI.baseAPIURL,
+                                  TenorAPI.apiKey,
+                                  TenorAPI.anonymousID,
+                                  limit,
+                                  searchTerm)
+        guard let searchURL = URL(string: searchString) else { return }
+        let searchRequest = URLRequest(url: searchURL)
         
         makeWebRequest(urlRequest: searchRequest,
                        callback: { (value: JSON) in
@@ -85,7 +88,10 @@ class TenorAPI: TenorAPIProtocol {
                                 gifs.append(gif)
                             }
                         }
-                        success(gifs)
+                        
+                        DispatchQueue.main.async {
+                            success(gifs)
+                        }
         })
     }
     
@@ -103,7 +109,7 @@ class TenorAPI: TenorAPIProtocol {
             }
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             task.resume()
         }
     }

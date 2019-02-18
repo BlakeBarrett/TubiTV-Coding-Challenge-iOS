@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,76 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tubi_TV_Blake_Challenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search Tenor" translatesAutoresizingMaskIntoConstraints="NO" id="jDc-cG-aYq">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="rPO-AP-5uu"/>
+                                </connections>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vLW-79-aG4">
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lGr-QK-aEF">
+                                    <size key="itemSize" width="160" height="120"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="gifCollectionViewCellReuseIdentifier" id="L3B-7f-nhq" customClass="GifCollectionViewCell" customModule="Tubi_TV_Blake_Challenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <size key="customSize" width="160" height="120"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="rSR-HP-ZY0"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vLW-79-aG4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0KY-fv-4ZS"/>
+                            <constraint firstItem="vLW-79-aG4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Fmk-sv-XRq"/>
+                            <constraint firstItem="vLW-79-aG4" firstAttribute="top" secondItem="jDc-cG-aYq" secondAttribute="bottom" id="Srd-H9-Tgc"/>
+                            <constraint firstItem="jDc-cG-aYq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="UGc-ff-8od"/>
+                            <constraint firstItem="jDc-cG-aYq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WwH-f5-Fgt"/>
+                            <constraint firstItem="vLW-79-aG4" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="bcv-Vq-BnR"/>
+                            <constraint firstItem="jDc-cG-aYq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zOB-Xi-aKi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="vLW-79-aG4" id="hHh-6O-1uw"/>
+                        <outlet property="searchBar" destination="jDc-cG-aYq" id="g2f-6R-tD1"/>
+                        <outlet property="searchDisplayController" destination="np4-Ni-Zi3" id="slB-dg-6Jg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="np4-Ni-Zi3">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="OA6-0P-iHZ"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="nx2-Ug-H0F"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="Oyo-98-0Gb"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="9w8-1e-zeB"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
+            <point key="canvasLocation" x="141.59999999999999" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>

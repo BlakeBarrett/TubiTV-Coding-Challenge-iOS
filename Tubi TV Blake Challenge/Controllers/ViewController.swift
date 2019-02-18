@@ -12,15 +12,53 @@ class ViewController: UIViewController {
 
     let api = TenorAPI()
     
+    var values = [TenorResource]()
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        api.search(for: "wink",
-                   success: { (values: [TenorResource]?) in
-                    print(String(describing: values))
-        },
+        self.search(for: "wink")
+        
+        collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.identifier)
+        searchBar.delegate = self
+    }
+    
+    func search(for value: String) {
+        api.search(for: value,
+                   success: {[weak self] (values: [TenorResource]?) in
+                    if let values = values {
+                        self?.values.removeAll()
+                        self?.values.append(contentsOf: values)
+                        self?.collectionView.reloadData()
+                    }
+            },
                    failure: { (error) in
                     print(String(describing: error))
         })
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        search(for: searchText)
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return values.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // gifCollectionViewCellReuseIdentifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GifCollectionViewCell.identifier,
+                                                      for: indexPath) as! GifCollectionViewCell
+        let value = values[indexPath.row]
+        cell.set(value)
+        return cell
     }
 }

@@ -13,6 +13,7 @@
 		25440C712219381600BE98D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25440C702219381600BE98D3 /* Assets.xcassets */; };
 		25440C742219381600BE98D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25440C722219381600BE98D3 /* LaunchScreen.storyboard */; };
 		25440C7F2219381600BE98D3 /* Tubi_TV_Blake_ChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25440C7E2219381600BE98D3 /* Tubi_TV_Blake_ChallengeTests.swift */; };
+		257BC3CC221A71E000E86FA5 /* GifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257BC3CB221A71E000E86FA5 /* GifCollectionViewCell.swift */; };
 		25C0967E22193A9600F30451 /* TenorAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C0967D22193A9600F30451 /* TenorAPI.swift */; };
 		25C0968422193C7A00F30451 /* TenorResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C0968322193C7A00F30451 /* TenorResource.swift */; };
 		25C0968622193DE800F30451 /* TenorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C0968522193DE800F30451 /* TenorResponse.swift */; };
@@ -39,6 +40,7 @@
 		25440C7A2219381600BE98D3 /* Tubi TV Blake ChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tubi TV Blake ChallengeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25440C7E2219381600BE98D3 /* Tubi_TV_Blake_ChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tubi_TV_Blake_ChallengeTests.swift; sourceTree = "<group>"; };
 		25440C802219381600BE98D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		257BC3CB221A71E000E86FA5 /* GifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewCell.swift; sourceTree = "<group>"; };
 		25C0967D22193A9600F30451 /* TenorAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenorAPI.swift; sourceTree = "<group>"; };
 		25C0968322193C7A00F30451 /* TenorResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenorResource.swift; sourceTree = "<group>"; };
 		25C0968522193DE800F30451 /* TenorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenorResponse.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				25440C692219381400BE98D3 /* AppDelegate.swift */,
 				25440C6B2219381400BE98D3 /* ViewController.swift */,
 				25C0967D22193A9600F30451 /* TenorAPI.swift */,
+				257BC3CB221A71E000E86FA5 /* GifCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				25C0968622193DE800F30451 /* TenorResponse.swift in Sources */,
 				25440C6C2219381400BE98D3 /* ViewController.swift in Sources */,
 				25440C6A2219381400BE98D3 /* AppDelegate.swift in Sources */,
+				257BC3CC221A71E000E86FA5 /* GifCollectionViewCell.swift in Sources */,
 				25C0968422193C7A00F30451 /* TenorResource.swift in Sources */,
 				25C0967E22193A9600F30451 /* TenorAPI.swift in Sources */,
 			);
