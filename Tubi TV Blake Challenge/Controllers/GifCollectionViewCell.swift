@@ -36,7 +36,9 @@ import UIKit
                 
                 imageView.frame = self?.contentView.frame ?? CGRect.zero
                 
-                imageView.contentMode = .scaleAspectFit
+                imageView.contentMode = .scaleAspectFill
+                
+                self?.contentView.clipsToBounds = true
                 
                 self?.contentView.removeAllSubviews()
                 
