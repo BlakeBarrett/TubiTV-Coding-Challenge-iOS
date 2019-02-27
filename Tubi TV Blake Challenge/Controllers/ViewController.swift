@@ -17,12 +17,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var debouncer: Debouncable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.search(for: "wink")
+        
+        search(for: "wink")
+        
+        debouncer = Debouncer()
         
         collectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: GifCollectionViewCell.identifier)
+        collectionView.allowsSelection = true
+        collectionView.delegate = self
         searchBar.delegate = self
     }
     
@@ -44,7 +50,9 @@ class ViewController: UIViewController {
 extension ViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        search(for: searchText)
+        debouncer?.renew {
+            self.search(for: searchText)
+        }
     }
 }
 
@@ -60,5 +68,21 @@ extension ViewController: UICollectionViewDataSource {
         let value = values[indexPath.row]
         cell.set(value)
         return cell
+    }
+}
+
+extension ViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let item = values[indexPath.row]
+        
+        let urlString = item.url
+        
+        let player = GifPlayerViewController(nibName: nil, bundle: nil)
+        
+        player.play(urlString)
+        
+        present(player, animated: false)
     }
 }

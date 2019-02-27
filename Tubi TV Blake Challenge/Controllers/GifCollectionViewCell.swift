@@ -14,18 +14,6 @@ import UIKit
     
     var item: TenorResource?
     
-    override init(frame: CGRect) {
-        
-        super.init(frame: frame)
-        
-        addTapListener()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func set(_ value: TenorResource) {
         
         loadImageFrom(url: value.preview)
@@ -57,29 +45,6 @@ import UIKit
         }
     }
     
-}
-
-extension GifCollectionViewCell {
-    
-    func addTapListener() {
-        
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
-        
-        self.contentView.addGestureRecognizer(recognizer)
-    }
-    
-    @IBAction func onTap(_ sender: UITapGestureRecognizer) {
-        
-        guard let urlString = item?.url else { return }
-        
-        let player = GifPlayerViewController(nibName: nil, bundle: nil)
-        
-        player.play(urlString)
-        
-        // This is a _bit_ of a hack, but it's safe and it works.
-        UIApplication.shared.keyWindow?.rootViewController?.present(player,
-                                                                    animated: false)
-    }
 }
 
 @objc extension UIView {
